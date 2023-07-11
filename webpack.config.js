@@ -9,8 +9,9 @@ module.exports = {
 	devtool: "cheap-module-source-map",
 	entry: {
 		popup: path.resolve("./src/popup/index.tsx"),
-		//add
 		background: path.resolve("./src/background/background.ts"),
+		// add
+		options: path.resolve("./src/options/index.tsx"),
 		//
 	},
 	resolve: {
@@ -54,6 +55,11 @@ module.exports = {
 			title: "react Chrome extension",
 			filename: "popup.html",
 			chunks: ["popup"],
+		}),
+		new HtmlWebpackPlugin({
+			title: "react Chrome extension",
+			filename: "options.html",
+			chunks: ["options"],
 		}),
 	],
 	output: {
