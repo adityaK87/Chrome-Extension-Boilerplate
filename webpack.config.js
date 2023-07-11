@@ -5,11 +5,17 @@ const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer");
 
 module.exports = {
+	mode: "development",
+	devtool: "cheap-module-source-map",
 	entry: {
 		popup: path.resolve("./src/popup/index.tsx"),
+		//add
+		background: path.resolve("./src/background/background.ts"),
+		//
 	},
-	devtool: "cheap-module-source-map",
-	mode: "development",
+	resolve: {
+		extensions: [".tsx", ".ts", ".js"],
+	},
 	module: {
 		rules: [
 			{
@@ -44,17 +50,12 @@ module.exports = {
 				},
 			],
 		}),
-		//add
 		new HtmlWebpackPlugin({
 			title: "react Chrome extension",
 			filename: "popup.html",
 			chunks: ["popup"],
 		}),
-		//
 	],
-	resolve: {
-		extensions: [".tsx", ".ts", ".js"],
-	},
 	output: {
 		filename: "[name].js",
 	},
