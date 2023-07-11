@@ -1,11 +1,15 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer");
 
 module.exports = {
-	mode: "development",
+	entry: {
+		popup: path.resolve("./src/popup/index.tsx"),
+	},
 	devtool: "cheap-module-source-map",
+	mode: "development",
 	module: {
 		rules: [
 			{
@@ -32,7 +36,6 @@ module.exports = {
 		],
 	},
 	plugins: [
-		//add
 		new CopyPlugin({
 			patterns: [
 				{
@@ -40,6 +43,12 @@ module.exports = {
 					to: path.resolve("dist"),
 				},
 			],
+		}),
+		//add
+		new HtmlWebpackPlugin({
+			title: "react Chrome extension",
+			filename: "popup.html",
+			chunks: ["popup"],
 		}),
 		//
 	],
