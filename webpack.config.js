@@ -1,8 +1,12 @@
+const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer");
+
 module.exports = {
 	mode: "development",
 	devtool: "cheap-module-source-map",
 	module: {
-		//add
 		rules: [
 			{
 				use: "ts-loader",
@@ -27,7 +31,18 @@ module.exports = {
 			},
 		],
 	},
-	//
+	plugins: [
+		//add
+		new CopyPlugin({
+			patterns: [
+				{
+					from: path.resolve("src/static"),
+					to: path.resolve("dist"),
+				},
+			],
+		}),
+		//
+	],
 	resolve: {
 		extensions: [".tsx", ".ts", ".js"],
 	},
